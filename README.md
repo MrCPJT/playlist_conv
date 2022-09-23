@@ -12,5 +12,5 @@ Ideas:
 3. Present with option of various other platforms to create playlist on (YouTube, Soundcloud, etc)
 4. Using further self-authentication, create a new playlist with a custom name (can be renamed later on)
 5. Once specified, using the respective platform's search, append the new playlist with the most relevant search result (add options to this later on)
-6. Extra: (Interface to review appendage before adding? Yes / No [with option to choose the next most relevant search result]) 
+6. Extra: (Interface to review appendage before adding? Yes / No [with option to choose the next most relevant search result to append instead]) 
 
