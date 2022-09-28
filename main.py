@@ -1,25 +1,36 @@
-# from unittest import result
+
+# Packages
+
 import spotipy
 import spotipy.oauth2
-# import os
 
-# print(os.getenv('SPOTIPY_CLIENT_ID'))
-# print(os.getenv('SPOTIPY_CLIENT_SECRET'))
-# print(os.getenv('SPOTIPY_REDIRECT_URI'))
+# Short-handing command
 
 spotify = spotipy.Spotify(client_credentials_manager=spotipy.oauth2.SpotifyClientCredentials())
-scope = 'user-top-read'
+
+# Setting scope and retrieving auth
+
+scope = 'playlist-read-private'
 sp = spotipy.Spotify(auth_manager=spotipy.oauth2.SpotifyOAuth(scope=scope))
 
-ranges = ['short_term', 'medium_term', 'long_term']
+user_id = sp.current_user()["id"]
+print(user_id)
 
-for sp_range in ranges:
-    print("-----------------------------------", "\n")
-    results = sp.current_user_top_tracks(time_range=sp_range, limit=10)
-    for i, item in enumerate(results['items']):
-        # print(i, item)
-        # print(i, item['name'], '//', item['artists'][0]['name'], '//', item['artists'][0]['type'], '//', item['type'])
-        if i == 0: print("----- Most Popular -----")
-        print((int(i) + 1), item['name'], '-', item['artists'][0]['name'])
-        if i == 9: print("----- Least Popular -----")
-    print()
+results = sp.current_user_playlists(limit=50)
+
+print("User playlists: ")
+for i, item in enumerate(results['items']):
+    print("%d %s" % (i, item['name']))
+
+ind_inp = input("Please input playlist index to copy")
+
+print("Playlist name: ", results['items'][int(ind_inp)]['name'], "Playlist ID: ", results['items'][int(ind_inp)]['id'])
+
+playlist_id = results['items'][int(ind_inp)]['id']
+
+playlist_results = sp.user_playlist_tracks(user_id,playlist_id)
+for i in range(len(playlist_results['items'])):
+    print("Name: ", playlist_results['items'][i]['track']['name'],"Artist: ", playlist_results['items'][i]['track']['artists'][0]['name'])
+
+
+
