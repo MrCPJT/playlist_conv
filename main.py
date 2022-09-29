@@ -28,9 +28,13 @@ print("Playlist name: ", results['items'][int(ind_inp)]['name'], "Playlist ID: "
 
 playlist_id = results['items'][int(ind_inp)]['id']
 
+to_search =[]
 playlist_results = sp.user_playlist_tracks(user_id,playlist_id)
 for i in range(len(playlist_results['items'])):
     print("Name: ", playlist_results['items'][i]['track']['name'],"Artist: ", playlist_results['items'][i]['track']['artists'][0]['name'])
+    to_search.append(playlist_results['items'][i]['track']['name'] + ' ' + playlist_results['items'][i]['track']['artists'][0]['name'])
 
+for i in to_search:
+    print(i)
 
 
